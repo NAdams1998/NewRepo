@@ -1,2 +1,9 @@
 import pandas as pd
 import matplotlib.pyplt as plt
+
+# Loading the data from the excel file
+df = pd.read_excel('UScensusdatabystate.xlsx', sheet_name='data')
+
+# Grouping data by state
+grouped = df.groupby(['State'])
+
