@@ -7,3 +7,15 @@ df = pd.read_excel('UScensusdatabystate.xlsx', sheet_name='data')
 # Grouping data by state
 grouped = df.groupby(['State'])
 
+# Iterate over each state and plot a line chart
+for name, group in grouped:
+  plt.plot(group['Est Base Population, April 1, 2020'], group['Population Estimate, July 1, 2020'], group['Population Estimate, July 1, 2021'], label=name)
+
+# Set chart title and axis lables
+plt.title('US Census Data by State 2020-2021')
+plt.xlable('Year')
+plt.ylable('Estimated Population by state')
+
+# Set a legend and display chart
+plt.legend(loc='upper left', fontsize='medium')
+plt.show()
