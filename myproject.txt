@@ -1,5 +1,5 @@
 import pandas as pd
-import matplotlib.pyplt as plt
+import matplotlib.pyplot as plt
 
 # Loading the data from the excel file
 df = pd.read_excel('UScensusdatabystate.xlsx', sheet_name='data')
@@ -7,14 +7,23 @@ df = pd.read_excel('UScensusdatabystate.xlsx', sheet_name='data')
 # Grouping data by state
 grouped = df.groupby(['State'])
 
-# Iterate over each state and plot a line chart
-for name, group in grouped:
-  plt.plot(group['Est Base Population, April 1, 2020'], group['Population Estimate, July 1, 2020'], group['Population Estimate, July 1, 2021'], label=name)
+# Define a list of colors to use for each line
+colors = ['r', 'g', 'b', 'c', 'm', 'y', 'k']
 
-# Set chart title and axis lables
+# Iterate over each state and plot a line chart
+for i, (name, group) in enumerate(grouped):
+    # Use modulo to cycle through the colors list
+    color = colors[i % len(colors)]
+    # Plot the line with the chosen color
+    plt.plot(group['Est Base Population, April 1, 2020'], 
+             group['Population Estimate, July 1, 2020'], 
+             group['Population Estimate, July 1, 2021'], 
+             label=name, color=color)
+
+# Set chart title and axis labels
 plt.title('US Census Data by State 2020-2021')
-plt.xlable('Year')
-plt.ylable('Estimated Population by state')
+plt.xlabel('Year')
+plt.ylabel('Estimated Population by State')
 
 # Set a legend and display chart
 plt.legend(loc='upper left', fontsize='medium')
